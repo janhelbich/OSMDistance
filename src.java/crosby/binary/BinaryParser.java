@@ -23,7 +23,6 @@ import java.util.List;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 
-import crosby.binary.Osmformat;
 import crosby.binary.file.BlockReaderAdapter;
 import crosby.binary.file.FileBlock;
 import crosby.binary.file.FileBlockPosition;
@@ -75,7 +74,6 @@ public abstract class BinaryParser implements BlockReaderAdapter {
 
     }
 
-
     @Override
     public boolean skipBlock(FileBlockPosition block) {
         // System.out.println("Seeing block of type: "+block.getType());
@@ -114,8 +112,7 @@ public abstract class BinaryParser implements BlockReaderAdapter {
         lon_offset = block.getLonOffset();
         date_granularity = block.getDateGranularity();
 
-        for (Osmformat.PrimitiveGroup groupmessage : block
-                .getPrimitivegroupList()) {
+        for (Osmformat.PrimitiveGroup groupmessage : block.getPrimitivegroupList()) {
             // Exactly one of these should trigger on each loop.
             parseNodes(groupmessage.getNodesList());
             parseWays(groupmessage.getWaysList());
